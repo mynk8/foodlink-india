@@ -1,45 +1,31 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Search, X } from "lucide-react";
 import ResourceCard from "@/components/ResourceCard";
 import { Button } from "@/components/ui/button";
+import { resources } from "@/data/resources";
 
 const FindResources = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
-  const resources = [
-    {
-      name: "Sunshine Community Kitchen",
-      type: "Community Kitchen",
-      address: "245 Oak Street, Downtown",
-      hours: "Mon-Fri: 11:30am - 1:30pm, 5:00pm - 7:00pm",
-      phone: "(555) 123-4567",
-      distance: "0.3 mi",
-    },
-    {
-      name: "Harvest Food Pantry",
-      type: "Food Pantry",
-      address: "892 Maple Avenue, Riverside",
-      hours: "Tue & Thu: 9:00am - 4:00pm, Sat: 10:00am - 2:00pm",
-      phone: "(555) 234-5678",
-      distance: "0.8 mi",
-    },
-    {
-      name: "Green Market Community Share",
-      type: "Fresh Produce Distribution",
-      address: "1523 Pine Boulevard, Westside",
-      hours: "Wed & Fri: 3:00pm - 6:00pm",
-      distance: "1.2 mi",
-    },
-    {
-      name: "Neighborhood Meals Program",
-      type: "Hot Meal Service",
-      address: "67 Elm Street, Central",
-      hours: "Daily: 12:00pm - 1:00pm, 6:00pm - 7:00pm",
-      phone: "(555) 345-6789",
-      distance: "1.5 mi",
-    },
-  ];
+  const filteredResources = useMemo(
+    () =>
+      resources.filter((resource) => {
+        if (searchQuery === "") {
+          return true;
+        }
+
+        const query = searchQuery.toLowerCase();
+
+        return (
+          resource.name.toLowerCase().includes(query) ||
+          resource.type.toLowerCase().includes(query) ||
+          resource.tags.some((tag) => tag.toLowerCase().includes(query)) ||
+          resource.location.neighborhood.toLowerCase().includes(query)
+        );
+      }),
+    [searchQuery]
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -151,26 +137,23 @@ const FindResources = () => {
       {/* Resources List */}
       <div className="max-w-lg mx-auto px-6">
         <div className="grid grid-cols-1 gap-8">
-          {resources
-            .filter(
-              (resource) =>
-                searchQuery === "" ||
-                resource.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                resource.type.toLowerCase().includes(searchQuery.toLowerCase())
-            )
-            .map((resource, index) => (
-              <ResourceCard key={index} {...resource} />
-            ))}
+          {filteredResources.map((resource) => (
+            <ResourceCard
+              key={resource.slug}
+              slug={resource.slug}
+              name={resource.name}
+              type={resource.type}
+              address={resource.location.address}
+              hours={resource.hours}
+              phone={resource.contact.phone}
+              distance={resource.distance}
+            />
+          ))}
         </div>
       </div>
 
       {/* Empty State */}
-      {resources.filter(
-        (resource) =>
-          searchQuery === "" ||
-          resource.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          resource.type.toLowerCase().includes(searchQuery.toLowerCase())
-      ).length === 0 && (
+      {filteredResources.length === 0 && (
         <div className="max-w-lg mx-auto px-6 text-center py-12">
           <p className="text-muted-foreground">
             No resources found matching "{searchQuery}"

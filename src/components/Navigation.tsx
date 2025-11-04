@@ -19,7 +19,7 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border z-50 safe-area-bottom">
+    <nav className="fixed opacity-90 backdrop-blur-xl bottom-0 left-0 right-0 bg-card border-t border-border z-50 safe-area-bottom">
       <div className="max-w-lg mx-auto px-4 py-3">
         <div className="flex items-center justify-around gap-2">
           {navItems.map((item) => {
@@ -36,7 +36,7 @@ const Navigation = () => {
                 transition={{ layout: { type: "spring", stiffness: 500, damping: 35 } }}
                 className={`relative group flex h-11 items-center overflow-hidden rounded-full px-3 flex-shrink-0 transition-colors duration-300 ${
                   isActive
-                    ? "gap-2 justify-start text-primary"
+                    ? "gap-2 justify-start border-2 border-primary text-primary"
                     : "justify-center text-muted-foreground hover:bg-muted/60 hover:text-foreground"
                 }`}
               >

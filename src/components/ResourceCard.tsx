@@ -1,7 +1,9 @@
 import { MapPin, Clock, Phone, Heart } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface ResourceCardProps {
+  slug: string;
   name: string;
   type: string;
   address: string;
@@ -10,11 +12,14 @@ interface ResourceCardProps {
   distance?: string;
 }
 
-const ResourceCard = ({ name, type, address, hours, phone, distance }: ResourceCardProps) => {
+const ResourceCard = ({ slug, name, type, address, hours, phone, distance }: ResourceCardProps) => {
   const [isLiked, setIsLiked] = useState(false);
 
   return (
-    <div className="group cursor-pointer animate-slide-up-soft">
+    <Link
+      to={`/resources/${slug}`}
+      className="group block cursor-pointer animate-slide-up-soft focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/40 rounded-3xl"
+    >
       {/* Google Maps Embed - Airbnb Style */}
       <div className="relative w-full aspect-[4/3] mb-4 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-accent/20">
         <iframe
@@ -33,6 +38,7 @@ const ResourceCard = ({ name, type, address, hours, phone, distance }: ResourceC
         <button
           onClick={(e) => {
             e.stopPropagation();
+            e.preventDefault();
             setIsLiked(!isLiked);
           }}
           className="absolute top-3 right-3 p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-md hover:bg-white transition-all duration-200 hover:scale-110 z-10"
@@ -96,7 +102,7 @@ const ResourceCard = ({ name, type, address, hours, phone, distance }: ResourceC
           <span className="text-primary">→</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
