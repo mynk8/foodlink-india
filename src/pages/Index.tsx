@@ -79,7 +79,7 @@ const Index = () => {
       <div className="mx-auto flex min-h-screen w-full max-w-md flex-col px-4 pb-28 pt-6">
         <main className="flex flex-1 flex-col space-y-8">
           <section className="relative overflow-hidden rounded-4xl bg-gradient-to-br from-primary/10 via-background to-background/60 p-4 shadow-lg shadow-primary/10">
-            <div className="absolute right-3 top-3 h-20 w-20 rounded-2xl bg-cover bg-center opacity-70" style={{ backgroundImage: `url(${heroImage})` }} />
+            <div className="absolute right-3 top-3 h-20 w-20 rounded-4xl bg-cover bg-center opacity-70" style={{ backgroundImage: `url(${heroImage})` }} />
             <div className="relative flex flex-col gap-3">
               <span className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-[11px] font-semibold tracking-wide text-primary">
                 <Sparkles className="h-3 w-3" />
@@ -181,7 +181,6 @@ const Index = () => {
                     <p className="text-xs text-primary-foreground/80">{copy}</p>
                   </div>
                   <span className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-primary-foreground/70">
-                    Let’s go
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>
                 </div>

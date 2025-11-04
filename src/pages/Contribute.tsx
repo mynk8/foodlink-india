@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, Package, Clock, CheckCircle2 } from "lucide-react";
+import { Heart, Package, Clock, CheckCircle2, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -64,6 +64,7 @@ const Contribute = () => {
   const [contributionType, setContributionType] = useState<"food" | "time" | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const { toast } = useToast();
+  const isFood = contributionType === "food";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,82 +136,110 @@ const Contribute = () => {
             />
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6 animate-slide-up-soft">
-            <div className="card-dignified p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  {contributionType === "food" ? (
-                    <Package className="w-5 h-5 text-primary" />
-                  ) : (
-                    <Clock className="w-5 h-5 text-primary" />
-                  )}
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6 animate-slide-up-soft pb-4">
+            <div className="card-dignified space-y-6 border-border/60 bg-card/95 p-5 backdrop-blur-sm sm:p-6">
+              <div className="flex items-center justify-between">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="-ml-2 px-2 text-muted-foreground sm:hidden"
+                  onClick={() => setContributionType(null)}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Back
+                </Button>
+                <div className="ml-auto flex items-center gap-2 rounded-full bg-muted/60 px-3 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  {isFood ? "Food contribution" : "Volunteer shift"}
                 </div>
-                <h2 className="text-xl font-semibold text-foreground">
-                  {contributionType === "food" ? "Food Contribution" : "Volunteer Opportunity"}
-                </h2>
               </div>
 
-              <div className="space-y-5">
-                <div>
-                  <Label htmlFor="name" className="text-foreground mb-2 block">
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  {isFood ? <Package className="h-5 w-5" /> : <Clock className="h-5 w-5" />}
+                </div>
+                <div className="flex-1 space-y-1">
+                  <h2 className="text-xl font-semibold text-foreground">
+                    {isFood ? "Share your food contribution" : "Volunteer opportunity"}
+                  </h2>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {isFood
+                      ? "Tell us what you have available and we'll coordinate pickup or drop-off details."
+                      : "Let us know when you're free so we can match you with the right volunteer shift."}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid gap-5 sm:gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-foreground">
                     Your name (optional)
                   </Label>
                   <Input
                     id="name"
+                    autoComplete="name"
                     placeholder="How should we address you?"
-                    className="bg-background border-muted"
+                    className="rounded-xl border-border/70 bg-background/80 px-4 py-3 text-base shadow-none"
                   />
                 </div>
 
-                <div>
-                  <Label htmlFor="contact" className="text-foreground mb-2 block">
+                <div className="space-y-2">
+                  <Label htmlFor="contact" className="text-foreground">
                     Contact info
                   </Label>
                   <Input
                     id="contact"
-                    type="email"
+                    type="text"
+                    inputMode="email"
+                    autoComplete="email"
                     placeholder="Email or phone number"
-                    className="bg-background border-muted"
+                    className="rounded-xl border-border/70 bg-background/80 px-4 py-3 text-base shadow-none"
                     required
                   />
+                  <p className="text-xs text-muted-foreground">
+                    We'll reach out only with essential next steps.
+                  </p>
                 </div>
 
-                <div>
-                  <Label htmlFor="details" className="text-foreground mb-2 block">
-                    {contributionType === "food" 
-                      ? "What would you like to share?"
-                      : "When are you available?"}
+                <div className="space-y-2">
+                  <Label htmlFor="details" className="text-foreground">
+                    {isFood ? "What would you like to share?" : "When are you available?"}
                   </Label>
                   <Textarea
                     id="details"
                     placeholder={
-                      contributionType === "food"
+                      isFood
                         ? "e.g., Fresh vegetables from my garden, 5 cans of soup, homemade meals..."
                         : "e.g., Weekday mornings, weekends, specific days..."
                     }
-                    className="bg-background border-muted min-h-[120px]"
+                    className="min-h-[140px] rounded-2xl border-border/70 bg-background/80 px-4 py-3 text-base leading-relaxed shadow-none sm:min-h-[120px]"
                     required
                   />
                 </div>
               </div>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => setContributionType(null)}
-                className="flex-1"
+                className="hidden w-full rounded-xl sm:inline-flex sm:flex-1"
               >
                 Back
               </Button>
-              <Button type="submit" className="flex-1 bg-primary hover:bg-primary/90">
-                <Heart className="w-4 h-4 mr-2" />
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full rounded-xl bg-primary text-base font-semibold shadow-sm hover:bg-primary/90 sm:flex-1"
+              >
+                <Heart className="h-5 w-5" />
                 Submit
               </Button>
             </div>
 
-            <p className="text-xs text-center text-muted-foreground leading-relaxed">
+            <p className="px-2 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
               Your information is kept private and only used to coordinate contributions.
             </p>
           </form>

@@ -57,62 +57,32 @@ const Nutrition = () => {
       </div>
 
       {/* Topics */}
-      <div className="max-w-lg mx-auto px-6 mt-6">
-        <div className="grid grid-cols-1 gap-6">
+      <div className="max-w-xl mx-auto px-4 mt-6">
+        <div className="flex flex-col gap-3">
           {topics.map((topic, index) => {
             const Icon = topic.icon;
             return (
-              <div
+              <article
                 key={index}
-                className="group cursor-pointer animate-slide-up-soft"
-                style={{ 
-                  animationDelay: `${index * 0.2}s`,
-                  transitionDelay: `${index * 0.2}s`
-                }}
+                className="rounded-xl border border-foreground/10 bg-card/90 p-4 shadow-sm"
               >
-                <div 
-                  className="bg-card rounded-2xl p-6 hover:-translate-y-1"
-                  style={{
-                    transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                  }}
-                >
-                  <div className="flex items-start gap-5">
-                    <div 
-                      className={`w-14 h-14 rounded-2xl ${topic.color} flex items-center justify-center group-hover:scale-110 flex-shrink-0`}
-                      style={{
-                        transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                        transitionDelay: `${index * 0.2}s`
-                      }}
-                    >
-                      <Icon className="w-7 h-7" style={{ color: topic.iconColor }} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 
-                        className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary"
-                        style={{
-                          transition: 'color 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                          transitionDelay: `${index * 0.2}s`
-                        }}
-                      >
-                        {topic.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                        {topic.description}
-                      </p>
-                      <div 
-                        className="flex items-center gap-1 text-xs text-muted-foreground opacity-0 group-hover:opacity-100"
-                        style={{
-                          transition: 'opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                          transitionDelay: `${index * 0.2}s`
-                        }}
-                      >
-                        <span>Learn more</span>
-                        <ArrowRight className="w-3 h-3 text-primary" />
-                      </div>
-                    </div>
+                <div className="flex items-start gap-3">
+                  <span
+                    className={`flex h-10 w-10 items-center justify-center rounded-lg ${topic.color}`}
+                  >
+                    <Icon className="h-5 w-5" style={{ color: topic.iconColor }} />
+                  </span>
+                  <div className="space-y-1">
+                    <h3 className="text-base font-semibold text-foreground">
+                      {topic.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-snug">
+                      {topic.description}
+                    </p>
                   </div>
+                  <ArrowRight className="ml-auto h-4 w-4 text-muted-foreground" />
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>

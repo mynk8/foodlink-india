@@ -31,14 +31,14 @@ const FindResources = () => {
     <div className="min-h-screen bg-background">
       
       {/* Header */}
-      <div className="bg-gradient-to-br from-primary/5 to-accent/10 pt-8 pb-8 px-6">
+      <div className="bg-gradient-to-br from-primary/5 to-accent/20 pt-10 pb-10 px-6">
         <div className="max-w-lg mx-auto">
           <div className="w-12 h-1 bg-primary rounded-full mb-4"></div>
           <h1 className="text-3xl font-bold text-foreground mb-3">
-            Food Resources Near You
+            Waste-to-Plate Partners Near You
           </h1>
           <p className="text-muted-foreground leading-relaxed">
-            All locations welcome everyone with open arms
+            Discover trusted partners transforming surplus food into dignified nourishment for every neighbor.
           </p>
         </div>
       </div>
@@ -131,6 +131,9 @@ const FindResources = () => {
               </button>
             ))}
           </div>
+          <p className="mt-5 px-2 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/80">
+            Curated with care · surplus-to-table distribution
+          </p>
         </div>
       </div>
 

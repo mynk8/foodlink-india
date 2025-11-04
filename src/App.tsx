@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import FindResources from "./pages/FindResources";
 import Contribute from "./pages/Contribute";
 import Nutrition from "./pages/Nutrition";
+import ResourceDetail from "./pages/ResourceDetail";
 import NotFound from "./pages/NotFound";
 import AppLayout from "./layouts/AppLayout";
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route element={<AppLayout />}>
             <Route path="/" element={<Index />} />
             <Route path="/resources" element={<FindResources />} />
+            <Route path="/resources/:slug" element={<ResourceDetail />} />
             <Route path="/contribute" element={<Contribute />} />
             <Route path="/nutrition" element={<Nutrition />} />
           </Route>
