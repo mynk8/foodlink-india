@@ -1,11 +1,64 @@
 import { useState } from "react";
 import { Heart, Package, Clock, CheckCircle2 } from "lucide-react";
-import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import shareImage from "@/assets/share.png";
+import volunteerImage from "@/assets/volunteer.png";
+
+const ImageOverlayCard = ({ 
+  imageUrl,
+  title,
+  subtitle,
+  description,
+  onClick,
+  className = ""
+}: {
+  imageUrl: string;
+  title: string;
+  subtitle?: string;
+  description: string;
+  onClick?: () => void;
+  className?: string;
+}) => {
+  return (
+    <div 
+      onClick={onClick}
+      className={`relative overflow-hidden rounded-2xl shadow-lg group cursor-pointer ${className}`}
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src={imageUrl}
+          alt={title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+      </div>
+      
+      {/* Gradient Overlay for Contrast */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+      
+      {/* Text Content */}
+      <div className="relative p-6 h-64 flex flex-col justify-end">
+        {subtitle && (
+          <p className="text-white/90 text-sm font-medium mb-2 tracking-wide uppercase">
+            {subtitle}
+          </p>
+        )}
+        <h3 className="text-white text-2xl font-bold mb-2">
+          {title}
+        </h3>
+        {description && (
+          <p className="text-white/80 text-sm leading-relaxed">
+            {description}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const Contribute = () => {
   const [contributionType, setContributionType] = useState<"food" | "time" | null>(null);
@@ -28,8 +81,7 @@ const Contribute = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-background pb-24 flex items-center justify-center px-6">
-        <Navigation />
+      <div className="min-h-screen bg-background flex items-center justify-center px-6">
         <div className="text-center animate-fade-in-slow">
           <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 className="w-8 h-8 text-primary" />
@@ -46,16 +98,16 @@ const Contribute = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-24">
-      <Navigation />
+    <div className="min-h-screen bg-background">
       
       {/* Header */}
-      <div className="bg-gradient-to-br from-primary/5 to-accent/10 pt-8 pb-6 px-6">
+      <div className="bg-gradient-to-br from-primary/5 to-accent/10 pt-8 pb-8 px-6">
         <div className="max-w-lg mx-auto">
-          <h1 className="text-3xl font-bold text-foreground mb-2">
+          <div className="w-12 h-1 bg-primary rounded-full mb-4"></div>
+          <h1 className="text-3xl font-bold text-foreground mb-3">
             Share What You Can
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground leading-relaxed">
             Every contribution, big or small, makes a real difference
           </p>
         </div>
@@ -64,43 +116,23 @@ const Contribute = () => {
       <div className="max-w-lg mx-auto px-6 mt-6">
         {!contributionType ? (
           <div className="space-y-4 animate-slide-up-soft">
-            <button
+            <ImageOverlayCard
+              imageUrl={shareImage}
+              title="Share Surplus Food"
+              subtitle="Food Donation"
+              description="Have extra groceries, a home garden harvest, or prepared meals to share? Let us know what you have."
               onClick={() => setContributionType("food")}
-              className="w-full card-dignified p-6 text-left group cursor-pointer hover:border-primary/30"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all">
-                  <Package className="w-6 h-6 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-xl font-semibold text-foreground mb-1.5">
-                    Share Surplus Food
-                  </h2>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    Have extra groceries, a home garden harvest, or prepared meals to share? Let us know what you have.
-                  </p>
-                </div>
-              </div>
-            </button>
+              className="w-full"
+            />
 
-            <button
+            <ImageOverlayCard
+              imageUrl={volunteerImage}
+              title="Volunteer Your Time"
+              subtitle="Time Contribution"
+              description="Help with meal prep, delivery, or organization. Any amount of time helps strengthen our community."
               onClick={() => setContributionType("time")}
-              className="w-full card-dignified p-6 text-left group cursor-pointer hover:border-primary/30"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all">
-                  <Clock className="w-6 h-6 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-xl font-semibold text-foreground mb-1.5">
-                    Volunteer Your Time
-                  </h2>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    Help with meal prep, delivery, or organization. Any amount of time helps strengthen our community.
-                  </p>
-                </div>
-              </div>
-            </button>
+              className="w-full"
+            />
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6 animate-slide-up-soft">

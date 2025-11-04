@@ -8,6 +8,7 @@ import FindResources from "./pages/FindResources";
 import Contribute from "./pages/Contribute";
 import Nutrition from "./pages/Nutrition";
 import NotFound from "./pages/NotFound";
+import AppLayout from "./layouts/AppLayout";
 
 const queryClient = new QueryClient();
 
@@ -18,10 +19,12 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/resources" element={<FindResources />} />
-          <Route path="/contribute" element={<Contribute />} />
-          <Route path="/nutrition" element={<Nutrition />} />
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<Index />} />
+            <Route path="/resources" element={<FindResources />} />
+            <Route path="/contribute" element={<Contribute />} />
+            <Route path="/nutrition" element={<Nutrition />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

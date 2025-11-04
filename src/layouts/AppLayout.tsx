@@ -1,0 +1,28 @@
+import Navigation from "@/components/Navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import { Outlet, useLocation } from "react-router-dom";
+
+const AppLayout = () => {
+  const location = useLocation();
+
+  return (
+    <div className="relative flex min-h-screen flex-col bg-background">
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.main
+          key={location.pathname}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -16 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          className="flex-1 pb-24"
+        >
+          <Outlet />
+        </motion.main>
+      </AnimatePresence>
+      <Navigation />
+    </div>
+  );
+};
+
+export default AppLayout;
+
