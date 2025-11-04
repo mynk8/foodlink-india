@@ -56,56 +56,41 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Main Actions - Bento Grid */}
-      <div className="max-w-5xl mx-auto mt-8 px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-fr">
-          <Link to="/resources" className="sm:col-span-2 lg:col-span-2 lg:row-span-2">
-            <div className="h-full p-6 group cursor-pointer bg-gradient-to-br from-primary/12 via-primary/8 to-primary/10 rounded-2xl transition-all duration-300 hover:shadow-[var(--shadow-gentle)] relative overflow-hidden border border-primary/20 hover:border-primary/30 hover:scale-[1.01] flex flex-col justify-between">
-              <div>
-                <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300">
-                  <MapPin className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <h2 className="text-xl font-semibold text-foreground relative w-full group-hover:text-primary transition-colors duration-300 mb-2">
-                  Find Resources Nearby
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  Discover food banks, community kitchens, and local support services in your area
-                </p>
+      {/* Main Actions - 2x2 Grid */}
+      <div className="max-w-lg mx-auto mt-8 px-6">
+        <div className="grid grid-cols-2 gap-4">
+          <Link to="/resources">
+            <div className="h-full p-6 group cursor-pointer bg-gradient-to-br from-primary/12 via-primary/8 to-primary/10 rounded-2xl transition-all duration-300 hover:shadow-[var(--shadow-gentle)] relative overflow-hidden border border-primary/20 hover:border-primary/30 hover:scale-[1.01] flex flex-col items-center justify-center gap-3 min-h-[140px]">
+              <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300">
+                <MapPin className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
               </div>
+              <h2 className="text-base font-semibold text-foreground text-center group-hover:text-primary transition-colors duration-300">
+                Find Resources Nearby
+              </h2>
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-primary rounded-full transition-all duration-300 group-hover:w-full"></span>
             </div>
           </Link>
 
-          <Link to="/contribute" className="sm:col-span-2 lg:col-span-2 lg:row-span-1">
-            <div className="h-full p-6 group cursor-pointer bg-gradient-to-br from-primary/12 via-primary/8 to-primary/10 rounded-2xl transition-all duration-300 hover:shadow-[var(--shadow-gentle)] relative overflow-hidden border border-primary/20 hover:border-primary/30 hover:scale-[1.01] flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-                <Heart className="w-7 h-7 text-primary group-hover:scale-110 transition-transform duration-300" />
+          <Link to="/contribute">
+            <div className="h-full p-6 group cursor-pointer bg-gradient-to-br from-primary/12 via-primary/8 to-primary/10 rounded-2xl transition-all duration-300 hover:shadow-[var(--shadow-gentle)] relative overflow-hidden border border-primary/20 hover:border-primary/30 hover:scale-[1.01] flex flex-col items-center justify-center gap-3 min-h-[140px]">
+              <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300">
+                <Heart className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <div className="flex-1">
-                <h2 className="text-lg font-semibold text-foreground relative w-full group-hover:text-primary transition-colors duration-300">
-                  Share & Contribute
-                </h2>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Give back to your community
-                </p>
-              </div>
+              <h2 className="text-base font-semibold text-foreground text-center group-hover:text-primary transition-colors duration-300">
+                Share & Contribute
+              </h2>
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-primary rounded-full transition-all duration-300 group-hover:w-full"></span>
             </div>
           </Link>
 
-          <Link to="/nutrition" className="sm:col-span-2 lg:col-span-2 lg:row-span-1">
-            <div className="h-full p-6 group cursor-pointer bg-gradient-to-br from-primary/12 via-primary/8 to-primary/10 rounded-2xl transition-all duration-300 hover:shadow-[var(--shadow-gentle)] relative overflow-hidden border border-primary/20 hover:border-primary/30 hover:scale-[1.01] flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-                <BookOpen className="w-7 h-7 text-primary group-hover:scale-110 transition-transform duration-300" />
+          <Link to="/nutrition">
+            <div className="h-full p-6 group cursor-pointer bg-gradient-to-br from-primary/12 via-primary/8 to-primary/10 rounded-2xl transition-all duration-300 hover:shadow-[var(--shadow-gentle)] relative overflow-hidden border border-primary/20 hover:border-primary/30 hover:scale-[1.01] flex flex-col items-center justify-center gap-3 min-h-[140px]">
+              <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300">
+                <BookOpen className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <div className="flex-1">
-                <h2 className="text-lg font-semibold text-foreground relative w-full group-hover:text-primary transition-colors duration-300">
-                  Nutrition & Wellness
-                </h2>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Learn about healthy eating and wellness
-                </p>
-              </div>
+              <h2 className="text-base font-semibold text-foreground text-center group-hover:text-primary transition-colors duration-300">
+                Nutrition & Wellness
+              </h2>
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-primary rounded-full transition-all duration-300 group-hover:w-full"></span>
             </div>
           </Link>

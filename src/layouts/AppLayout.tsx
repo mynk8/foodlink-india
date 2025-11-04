@@ -1,4 +1,5 @@
 import Navigation from "@/components/Navigation";
+import PhonePortraitWarning from "@/components/PhonePortraitWarning";
 import { AnimatePresence, motion } from "framer-motion";
 import { Outlet, useLocation } from "react-router-dom";
 
@@ -7,6 +8,7 @@ const AppLayout = () => {
 
   return (
     <div className="relative flex min-h-screen flex-col bg-background">
+      <PhonePortraitWarning />
       <AnimatePresence mode="wait" initial={false}>
         <motion.main
           key={location.pathname}
