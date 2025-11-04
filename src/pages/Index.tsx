@@ -219,20 +219,6 @@ const Index = () => {
         </main>
       </div>
 
-      <nav className="pointer-events-none fixed inset-x-0 bottom-4 mx-auto w-full max-w-md px-4">
-        <div className="pointer-events-auto flex items-center justify-between rounded-4xl border border-foreground/10 bg-background/95 p-4 shadow-xl shadow-primary/10 backdrop-blur">
-          <div className="text-xs text-muted-foreground">
-            <p className="font-semibold text-foreground">Need something now?</p>
-            <p>Tap to connect with the concierge team.</p>
-          </div>
-          <Link
-            to="/resources"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-wide text-primary-foreground shadow-md"
-          >
-            Live chat
-          </Link>
-        </div>
-      </nav>
     </div>
   );
 };
