@@ -75,8 +75,8 @@ const FindResources = () => {
               onFocus={() => setIsSearchFocused(true)}
               onBlur={() => setIsSearchFocused(false)}
               className="
-                flex-1 h-14 bg-transparent border-0 outline-none
-                text-base text-foreground placeholder:text-muted-foreground
+                flex-1 min-w-0 h-14 bg-transparent border-0 outline-none
+                truncate text-base text-foreground placeholder:text-muted-foreground
                 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none
               "
             />
@@ -96,7 +96,7 @@ const FindResources = () => {
             <Button
               size="lg"
               className="
-                mr-2 my-2 h-10 px-6 rounded-full
+                mr-2 my-2 h-10 px-6 rounded-full flex-shrink-0
                 bg-primary hover:bg-primary/90
                 text-primary-foreground font-medium
                 shadow-md hover:shadow-lg
